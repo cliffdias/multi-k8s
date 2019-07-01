@@ -24,3 +24,15 @@ after_success:
   - docker push cliffdias/multi-worker
   - docker push cliffdias/multi-nginx
 
+deploy:
+  provider: elasticbeanstalk
+  region: 'eu-west-2'
+  app: multi-docker
+  env: 'MultiDocker-env'
+  bucket_name: 'elasticbeanstalk-eu-west-2-673170517766'
+  bucket_path: 'multi-docker'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: '$AWS_SECRET_KEY'
